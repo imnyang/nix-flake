@@ -32,21 +32,19 @@
   users.users.neko = {
     isNormalUser = true;
     description = "neko";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" "video" "input" "storage" ];
     packages = with pkgs; [
       kdePackages.kate
     ];
   };
 
-  security.sudo.extraRules = [
-    {
-      users = [ "neko" ];
-      commands = [
-        {
-          command = "ALL";
-          options = [ "NOPASSWD" ];
-        }
-      ];
-    }
-  ];
+  # 보안 설정 개선 (NOPASSWD 제거)
+  security.sudo = {
+    enable = true;
+    wheelNeedsPassword = true;  # wheel 그룹도 패스워드 필요
+  };
+  
+  # 추가 보안 설정
+  security.polkit.enable = true;
+  security.pam.services.sddm.enableGnomeKeyring = true;
 }
