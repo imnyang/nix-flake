@@ -5,7 +5,8 @@
 
 set -e
 
-FLAKE_DIR="/home/neko/Workspace/imnyang/nix-flake"
+# 현재 디렉토리를 flake 디렉토리로 사용 (스크립트가 있는 위치의 상위 디렉토리)
+FLAKE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 HOSTNAME="neko-desktop"  # flake.nix의 hostname과 일치해야 함
 
 cd "$FLAKE_DIR"

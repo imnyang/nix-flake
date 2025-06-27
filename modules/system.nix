@@ -38,11 +38,18 @@
     ];
   };
 
-  # 보안 설정 개선 (NOPASSWD 제거)
-  security.sudo = {
-    enable = true;
-    wheelNeedsPassword = true;  # wheel 그룹도 패스워드 필요
-  };
+  # sudo 설정 (neko 사용자는 패스워드 없이 sudo 사용 가능)
+  security.sudo.extraRules = [
+    {
+      users = [ "neko" ];
+      commands = [
+        {
+          command = "ALL";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
   
   # 추가 보안 설정
   security.polkit.enable = true;

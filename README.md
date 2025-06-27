@@ -2,6 +2,8 @@
 
 현대적이고 최적화된 NixOS flake 설정입니다.
 
+**Repository**: https://github.com/imnyang/nix-flake
+
 ## ✨ 주요 특징
 
 - **🏠 Home Manager 통합**: 사용자별 설정을 선언적으로 관리
@@ -37,13 +39,13 @@
 
 ```bash
 # 리포지토리 클론
-git clone <repository-url> /home/neko/Workspace/imnyang/nix-flake
-cd /home/neko/Workspace/imnyang/nix-flake
+git clone https://github.com/imnyang/nix-flake.git
+cd nix-flake
 
 # 호스트명 및 사용자명 확인/수정
 # flake.nix의 hostname과 username을 실제 환경에 맞게 수정
 
-# 하드웨어 설정 생성
+# 하드웨어 설정 생성 (실제 설치 시)
 sudo nixos-generate-config --root /mnt
 
 # 시스템 빌드 및 적용

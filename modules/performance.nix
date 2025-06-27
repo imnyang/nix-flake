@@ -44,7 +44,7 @@
   system.autoUpgrade = {
     enable = false;  # 수동으로 관리하려면 false
     dates = "weekly";
-    flake = "/home/neko/Workspace/imnyang/nix-flake";
+    # flake = "github:imnyang/nix-flake";  # 자동 업데이트 시 사용할 flake
   };
   
   # 성능 프로파일
