@@ -83,7 +83,7 @@
     # === GUI 애플리케이션 ===
     vesktop
     ghostty
-    vscode-fhs
+    vscode
   ] ++ (with pkgs-unstable; [
     # 최신 버전이 필요한 패키지들
     zed-editor

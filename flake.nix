@@ -26,7 +26,7 @@
         config.allowUnfree = true;
       };
       
-      hostname = "neko-desktop"; # 원하는 호스트명으로 변경
+      hostname = "desktop"; # 원하는 호스트명으로 변경
       username = "neko";
     in
     flake-utils.lib.eachDefaultSystem (system: {
