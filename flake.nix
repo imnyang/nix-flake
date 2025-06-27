@@ -22,7 +22,9 @@
         system = "x86_64-linux";
 
         modules = [
+          ./hostname.nix
           ./hardware-configuration.nix
+
           ./modules/boot.nix
           ./modules/locale.nix
           ./modules/desktop.nix
