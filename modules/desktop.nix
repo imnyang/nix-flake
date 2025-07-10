@@ -50,16 +50,4 @@
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
-
-  # WillowDark Aurorae Window Decoration 설치
-  environment.systemPackages = with pkgs; [
-    willow-dark-aurorae
-  ];
-
-  # KDE 설정 파일 강제 적용 (Aurorae + WillowDark 테마)
-  environment.etc."xdg/kwinrc".text = ''
-    [org.kde.kdecoration2]
-    library=org.kde.kwin.aurorae
-    theme=WillowDark
-  '';
 }
