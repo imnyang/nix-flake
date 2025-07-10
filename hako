@@ -6,6 +6,8 @@ if [ "$1" = "help" ]; then
     echo "Commands:"
     echo "  help     - Show this help message"
     echo "  get-hw   - Copy hardware-configuration.nix from /etc/nixos to the current host's directory"
+    echo "  install  - Install the current host's configuration"
+    echo "  ch <new-hostname> - Change the hostname to <new-hostname>"
     exit 0
 fi
 
@@ -36,6 +38,30 @@ if [ "$1" = "install" ]; then
         exit 1
     fi
     echo "Successfully switched to the new configuration for ${hostname}."
+fi
+
+# change hostname
+if [ "$1" = "ch" ]; then
+    if [ -z "$2" ]; then
+        echo "Usage: hako ch <new-hostname>"
+        exit 1
+    fi
+    new_hostname="$2"
+    current_hostname=$(hostname)
+    if [ "$current_hostname" = "$new_hostname" ]; then
+        echo "Hostname is already set to ${new_hostname}."
+        exit 0
+    fi
+    echo "Changing hostname from ${current_hostname} to ${new_hostname}..."
+    sudo hostnamectl set-hostname "$new_hostname"
+    if [ $? -ne 0 ]; then
+        echo "Error: Failed to change hostname."
+        exit 1
+    fi
+    echo "Hostname changed successfully to ${new_hostname}."
+    echo "Please update your NixOS configuration and rebuild the system."
+    echo "You can use the command: hako install"
+    exit 0
 fi
 
 # Default case: if no command is provided, show help
