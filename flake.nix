@@ -26,31 +26,10 @@
         config.allowUnfree = true;
       };
       
-      hostname = builtins.getEnv "HOSTNAME";
       username = "neko";
-    in
-    flake-utils.lib.eachDefaultSystem (system: {
-      devShells.default = pkgs.mkShell {
-        buildInputs = with pkgs; [
-          # 개발 도구들
-          gcc
-          gnumake
-          python3
-          nodejs
-          bun
-          rustc
-          cargo
-          go
-        ];
-        
-        shellHook = ''
-          echo "🔧 개발 환경이 준비되었습니다!"
-          echo "사용 가능한 도구들: gcc, python3, nodejs, bun, rust, go"
-        '';
-      };
-    }) // {
-
-      nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
+      
+      # 호스트별 구성을 만드는 함수
+      mkNixosConfig = hostname: nixpkgs.lib.nixosSystem {
         inherit system;
         
         specialArgs = { 
@@ -81,6 +60,33 @@
             networking.hostName = hostname;
           }
         ];
+      };
+    in
+    flake-utils.lib.eachDefaultSystem (system: {
+      devShells.default = pkgs.mkShell {
+        buildInputs = with pkgs; [
+          # 개발 도구들
+          gcc
+          gnumake
+          python3
+          nodejs
+          bun
+          rustc
+          cargo
+          go
+        ];
+        
+        shellHook = ''
+          echo "🔧 개발 환경이 준비되었습니다!"
+          echo "사용 가능한 도구들: gcc, python3, nodejs, bun, rust, go"
+        '';
+      };
+    }) // {
+
+      nixosConfigurations = {
+        desktop = mkNixosConfig "desktop";
+        # 필요에 따라 다른 호스트 추가 가능
+        # laptop = mkNixosConfig "laptop";
       };
 
     };
