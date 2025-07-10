@@ -18,9 +18,9 @@
 
   i18n.inputMethod = {
     enable = true;
-    type = "ibus";
-    ibus = {
-         engines = [ pkgs.ibus-engines.hangul ];
+    type = "kime";
+    kime.config = {
+      indicator.icon_color = "White";
     };
   };
 }
