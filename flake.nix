@@ -27,7 +27,7 @@
       };
       
       hostname = builtins.getEnv "HOSTNAME";
-      username = builtins.getEnv "USERNAME" or "neko";
+      username = "neko";
     in
     flake-utils.lib.eachDefaultSystem (system: {
       devShells.default = pkgs.mkShell {
