@@ -8,7 +8,7 @@
   services.displayManager.sddm.wayland.enable = true;  # Wayland 지원
   services.desktopManager.plasma6.enable = true;
   services.desktopManager.plasma6.enableQt5Integration = true;
-  services.xserver.windowManager.xwayland.enable = true;
+  #services.xserver.windowManager.xwayland.enable = true;
 
   services.printing.enable = true;
 
