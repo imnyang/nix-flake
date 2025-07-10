@@ -26,8 +26,8 @@
         config.allowUnfree = true;
       };
       
-      hostname = "desktop"; # 원하는 호스트명으로 변경
-      username = "neko";
+      hostname = builtins.getEnv "HOSTNAME";
+      username = builtins.getEnv "USERNAME" or "neko";
     in
     flake-utils.lib.eachDefaultSystem (system: {
       devShells.default = pkgs.mkShell {
@@ -58,13 +58,12 @@
         };
 
         modules = [
-          ./hostname.nix
-          ./hardware-configuration.nix
+          (./. + "/hosts/${hostname}/hardware-configuration.nix")
 
           ./modules/boot.nix
           ./modules/locale.nix
           ./modules/desktop.nix
-          ./modules/nvidia.nix
+          (if hostname == "desktop" then ./modules/nvidia.nix else ./modules/dummy.nix)
           ./modules/packages.nix
           ./modules/system.nix
           # ./modules/performance.nix  # 성능 최적화 (필요시 주석 해제)

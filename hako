@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# help
+if [ "$1" = "help" ]; then
+    echo "Usage: hako [command]"
+    echo "Commands:"
+    echo "  help     - Show this help message"
+    echo "  get-hw   - Copy hardware-configuration.nix from /etc/nixos to the current host's directory"
+    exit 0
+fi
+
+if [ "$1" = "get-hw" ]; then
+    hostname=$(hostname)
+    mkdir -p "./hosts/${hostname}"
+    cp "/etc/nixos/hardware-configuration.nix" "./hosts/${hostname}/."
+    echo "Copied hardware-configuration.nix from /etc/nixos/ to hosts/${hostname}/"
+fi
+
+# Install get hostname automatically
+if [ "$1" = "install" ]; then
+    hostname=$(hostname)
+
+    if [ -z "$hostname" ]; then
+        echo "Error: Unable to determine hostname."
+        exit 1
+    fi
+
+    if [ ! -d "./hosts/${hostname}" ]; then
+        echo "Error: No configuration found for hostname ${hostname}."
+        exit 1
+    fi
+
+    nixos-rebuild switch --flake .#${hostname} --fast
+    if [ $? -ne 0 ]; then
+        echo "Error: Failed to switch to the new configuration."
+        exit 1
+    fi
+    echo "Successfully switched to the new configuration for ${hostname}."
+fi
+
+# Default case: if no command is provided, show help
+if [ $# -eq 0 ]; then
+    echo "No command provided. Use 'hako help' for usage information."
+    exit 1
+fi
