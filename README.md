@@ -52,30 +52,6 @@ sudo nixos-generate-config --root /mnt
 sudo nixos-rebuild switch --flake .#neko-desktop
 ```
 
-### 2. 일상 관리
-
-관리 스크립트를 사용하면 쉽게 시스템을 관리할 수 있습니다:
-
-```bash
-# 시스템 rebuild
-./scripts/manage.sh rebuild
-
-# 시스템 업데이트
-./scripts/manage.sh update
-
-# 전체 업그레이드
-./scripts/manage.sh upgrade
-
-# 시스템 정리
-./scripts/manage.sh clean
-
-# 개발 환경 진입
-./scripts/manage.sh dev
-
-# 도움말 보기
-./scripts/manage.sh help
-```
-
 ## 🛠️ 개발 환경
 
 이 flake는 다음 개발 도구들을 포함합니다:
