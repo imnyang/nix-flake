@@ -66,39 +66,6 @@ sudo nixos-rebuild switch --flake .#neko-desktop
 nix develop
 ```
 
-## 🎮 게이밍 & 그래픽
-
-- NVIDIA 드라이버 (최신 안정 버전)
-- Vulkan 지원
-- Steam (필요시 활성화)
-- 최적화된 Wayland 설정
-
-## 🔧 커스터마이징
-
-### 패키지 추가
-`modules/packages.nix` 또는 `home.nix`에 원하는 패키지를 추가하세요.
-
-### 서비스 활성화
-각 모듈 파일에서 필요한 서비스들을 enable/disable할 수 있습니다.
-
-### 성능 최적화 활성화
-`flake.nix`에 `./modules/performance.nix`를 추가하여 성능 최적화를 활성화할 수 있습니다.
-
-## 🐛 트러블슈팅
-
-### 빌드 실패
-```bash
-# 설정 문법 검사
-./scripts/manage.sh check
-
-# 롤백
-./scripts/manage.sh rollback
-```
-
-### NVIDIA 문제
-- Wayland에서 커서 문제가 있다면 X11으로 임시 전환
-- `nvidia-settings`로 그래픽 설정 확인
-
 ## 📝 주요 개선사항
 
 1. **Home Manager 통합**: 사용자별 설정을 체계적으로 관리
